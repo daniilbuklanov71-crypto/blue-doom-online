@@ -2467,14 +2467,7 @@ $('jump').addEventListener('pointerdown',e=>{e.preventDefault();jump()});
 $('nade').addEventListener('pointerdown',e=>{e.preventDefault();throwGrenade()});
 
 // Звук: первое касание включает аудио (требование iOS); кнопка и громкость в меню
-['pointerdown','touchstart','keydown'].forEach(ev=>addEventListener(ev,audInit,{passive:true}));
-audApply();
-$('sndBtn').addEventListener('click',()=>{A.on=!A.on;audApply();audSave();if(A.on)play('ui')});
-$('vol').addEventListener('input',e=>{A.vol=e.target.value/100;if(A.on&&A.master)A.master.gain.value=A.vol;audSave()});
-document.addEventListener('click',e=>{if(e.target.closest&&e.target.closest('#menu button')&&e.target.id!=='sndBtn')play('ui')});
-document.addEventListener('visibilitychange',()=>{savePlayTime();if(document.hidden&&running)pauseGame()});
-addEventListener('pagehide',savePlayTime);
-updatePlayTimeUI();
+
 // Virtual joystick
 const base=$('stickBase'),stick=$('stick');let joyId=null,joyCenter={x:0,y:0};
 function joyStart(e){e.preventDefault();joyId=e.pointerId;const r=base.getBoundingClientRect();joyCenter={x:r.left+r.width/2,y:r.top+r.height/2};base.setPointerCapture(e.pointerId);joyMove(e)}
